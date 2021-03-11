@@ -24,6 +24,8 @@ I would like this to support both upper and lower case characters and numbers
 if Z has to go up one it will go to a lower case a instead of an upper case A
 """
 
+# -----------------Section for encryption----------------- #
+
 def simple_shift(shift_text, shift_num):
     encyptedText = ""
     caps = False
@@ -73,13 +75,12 @@ def simple_shift(shift_text, shift_num):
         else:
             encyptedText += shift_text[char]
 
-
-
     return encyptedText
 
 
 def advanced_shift(shift_text, shift_num):
     pass
+
 
 def encyption():
     plainText = input("What do you want to encrypt\n")
@@ -106,12 +107,100 @@ def encyption():
                 encryptedText = advanced_shift(plainText, shift)
                 break
             else:
-                print("Please enter a number between 1 and 2\n")
+                print("\nPlease enter a number between 1 and 2\n")
                 continue
     print(encryptedText)
 
-def decryption():
+
+# -----------------Section for Decryption----------------- #
+
+
+def simple_decryption(textToDecrypt):
+    while True:
+        try:
+            shiftNum = int(input("What would you like to shift this by to decrypt it: "))
+            break
+        except:
+            print("Please enter an integer number")
+            continue
+    decryptedText = ""
+    caps = False
+    for char in range(len(textToDecrypt)):
+        if (ord(textToDecrypt[char]) >= 65 and ord(textToDecrypt[char]) <= 90):
+            caps = True
+            letter_value = ord(textToDecrypt[char])
+            letter_value -= 64 #This gets A to 1 this means we can tell which value this should be
+            new_value = letter_value + shiftN2um
+
+            while new_value > 26:
+                new_value -= 26
+                caps = not caps
+
+            while new_value < 1:
+                new_value += 26
+                caps = not caps
+
+            if caps == True:
+                new_value += 64
+            else:
+                new_value += 96
+
+            decryptedText += chr(new_value)
+
+        elif (ord(textToDecrypt[char]) >= 97 and ord(textToDecrypt[char]) <= 122):
+            caps = False
+            letter_value = ord(textToDecrypt[char])
+            letter_value -= 96  # This gets A to 1 this means we can tell which value this should be
+            new_value = letter_value + shiftNum
+
+            while new_value > 26:
+                new_value -= 26
+                caps = not caps
+
+            while new_value < 1:
+                new_value += 26
+                caps = not caps
+
+            if caps == True:
+                new_value += 64
+            else:
+                new_value += 96
+
+            decryptedText += chr(new_value)
+
+        else:
+            decryptedText += shift_text[char]
+
+    return decryptedText
+    
+
+
+def advanced_decryption(textToDecrypt):
     pass
+
+
+def decryption():
+    plainText = input("What text would you like to decrypt\n")
+    while True:
+        try:
+            print("Please pick an option\n")
+            print("Would you like a\n1. Set shift decryption\n 2. Automatic shift")
+            decryptionOption = int(input(">>:"))
+        except:
+            print("\nPlease enter an integer number!")
+            continue
+        finally:
+            if (decryptionOption == 1):
+                decryptedText = simple_decryption(plainText)
+                break
+            elif (decryptionOption == 2):
+                decryptedText = advanced_decryption(plainText)
+                break
+            else:
+                print("\nPlease enter a number between 1 and 2\n")
+                continue
+    print(decryptedText)
+
 
 def start():
     while True:
