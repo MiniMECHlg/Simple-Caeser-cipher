@@ -24,111 +24,117 @@ I would like this to support both upper and lower case characters and numbers
 if Z has to go up one it will go to a lower case a instead of an upper case A
 """
 
-#Splits a word into each cahracter into a list
+
+# ----------Basic parts for advnaced encryption----------- #
+
+
+#Splits a word into a list of single characters
 def split(word):
     return [char for char in word] 
 
-#Joins a list
+#Joins a list into a whole string
 def join(wordList):
     word = ""
     for char in range (len(wordList)):
         word += wordList[char]
     return word
 
+
 # -----------------Section for encryption----------------- #
 
-def simple_shift(shift_text, shift_num):
+
+def simple_shift(shiftText, shiftNum):
     encryptedText = ""
-    for char in range(len(shift_text)):
-        if (ord(shift_text[char]) >= 65 and ord(shift_text[char]) <= 90):
-            letter_value = ord(shift_text[char])
-            letter_value -= 64 #This gets A to 1 this means we can tell which value this should be
-            new_value = letter_value + shift_num
+    for char in range(len(shiftText)):
+        if (ord(shiftText[char]) >= 65 and ord(shiftText[char]) <= 90):
+            letterValue = ord(shiftText[char])
+            letterValue -= 64 #This gets A to 1 this means we can tell which value this should be
+            newValue = letterValue + shiftNum
 
-            div = new_value//26
-            new_value = new_value%26
+            div = newValue//26
+            newValue = newValue%26
 
-            if new_value == 0:
-                new_value += 90
+            if newValue == 0:
+                newValue += 90
             elif div%2 == 0: #if it is even it needs to be a cap
-                new_value += 64
+                newValue += 64
             else: #if odd it needs to be a lowercase
-                new_value += 96
+                newValue += 96
 
-            encryptedText += chr(new_value)
+            encryptedText += chr(newValue)
 
-        elif (ord(shift_text[char]) >= 97 and ord(shift_text[char]) <= 122):
-            letter_value = ord(shift_text[char])
-            letter_value -= 96  # This gets A to 1 this means we can tell which value this should be
-            new_value = letter_value + shift_num
+        elif (ord(shiftText[char]) >= 97 and ord(shiftText[char]) <= 122):
+            letterValue = ord(shiftText[char])
+            letterValue -= 96  # This gets A to 1 this means we can tell which value this should be
+            newValue = letterValue + shiftNum
 
-            div = new_value//26
-            new_value = new_value%26
+            div = newValue//26
+            newValue = newValue%26
             
-            if new_value == 0:
-                new_value += 122
+            if newValue == 0:
+                newValue += 122
             elif div%2 == 1: #if it is odd it needs to be a cap
-                new_value += 64
+                newValue += 64
             else: #if even it has to be a lower case
-                new_value += 96
+                newValue += 96
 
-            encryptedText += chr(new_value)
+            encryptedText += chr(newValue)
 
         else:
-            encryptedText += shift_text[char]
+            encryptedText += shiftText[char]
 
     return encryptedText
 
 
 def advanced_shift(shiftText, shiftNum):
     encyptedText = ""
-    caps = False
     char = 0
     while char != (len(shiftText)):
         if (char % 5) == 0 and (char != 0):
             textArray = split(shiftText)
-            print(textArray)
             textArray.insert(char, " ")
             shiftText = join(textArray)
+
         elif((ord(shiftText[char]) != 32) and not ((ord(shiftText[char]) >= 65 and ord(shiftText[char]) <= 90) or (ord(shiftText[char]) >= 97 and ord(shiftText[char]) <= 122))):
             textArray = split(shiftText)
             del textArray[char]
             shiftText = join(textArray)
+
         if (ord(shiftText[char]) >= 65 and ord(shiftText[char]) <= 90):
             caps = True
-            letter_value = ord(shiftText[char])
-            letter_value -= 64 #This gets A to 1 this means we can tell which value this should be
-            new_value = letter_value + shiftNum
+            letterValue = ord(shiftText[char])
+            letterValue -= 64 #This gets A to 1 this means we can tell which value this should be
+            newValue = letterValue + shiftNum
 
-            div = new_value//26
-            new_value = new_value%26
+            div = newValue//26
+            newValue = newValue%26
 
-            if new_value == 0:
-                new_value += 90
+            if newValue == 0:
+                newValue += 90
             elif div%2 == 0: #if it is even it needs to be a cap
-                new_value += 64
+                newValue += 64
             else: #if odd it needs to be a lowercase
-                new_value += 96
+                newValue += 96
 
-            encyptedText += chr(new_value)
+            encyptedText += chr(newValue)
 
         elif (ord(shiftText[char]) >= 97 and ord(shiftText[char]) <= 122):
             caps = False
-            letter_value = ord(shiftText[char])
-            letter_value -= 96  # This gets A to 1 this means we can tell which value this should be
-            new_value = letter_value + shiftNum
+            letterValue = ord(shiftText[char])
+            letterValue -= 96  # This gets A to 1 this means we can tell which value this should be
+            newValue = letterValue + shiftNum
 
-            div = new_value//26
-            new_value = new_value%26
+            div = newValue//26
+            newValue = newValue%26
 
-            if new_value == 0:
-                new_value += 122
+            if newValue == 0:
+                newValue += 122
             elif div%2 == 1: #if it is odd it needs to be a cap
-                new_value += 64
+                newValue += 64
             else: #if even it has to be a lower case
-                new_value += 96
+                newValue += 96
 
-            encyptedText += chr(new_value)
+            encyptedText += chr(newValue)
 
         else:
             encyptedText += shiftText[char]
@@ -184,48 +190,48 @@ def simple_decryption(textToDecrypt):
     for char in range(len(textToDecrypt)):
         if (ord(textToDecrypt[char]) >= 65 and ord(textToDecrypt[char]) <= 90):
             caps = True
-            letter_value = ord(textToDecrypt[char])
-            letter_value -= 64 #This gets A to 1 this means we can tell which value this should be
-            new_value = letter_value + shiftN2um
+            letterValue = ord(textToDecrypt[char])
+            letterValue -= 64 #This gets A to 1 this means we can tell which value this should be
+            newValue = letterValue + shiftN2um
 
-            while new_value > 26:
-                new_value -= 26
+            while newValue > 26:
+                newValue -= 26
                 caps = not caps
 
-            while new_value < 1:
-                new_value += 26
+            while newValue < 1:
+                newValue += 26
                 caps = not caps
 
             if caps == True:
-                new_value += 64
+                newValue += 64
             else:
-                new_value += 96
+                newValue += 96
 
-            decryptedText += chr(new_value)
+            decryptedText += chr(newValue)
 
         elif (ord(textToDecrypt[char]) >= 97 and ord(textToDecrypt[char]) <= 122):
             caps = False
-            letter_value = ord(textToDecrypt[char])
-            letter_value -= 96  # This gets A to 1 this means we can tell which value this should be
-            new_value = letter_value + shiftNum
+            letterValue = ord(textToDecrypt[char])
+            letterValue -= 96  # This gets A to 1 this means we can tell which value this should be
+            newValue = letterValue + shiftNum
 
-            while new_value > 26:
-                new_value -= 26
+            while newValue > 26:
+                newValue -= 26
                 caps = not caps
 
-            while new_value < 1:
-                new_value += 26
+            while newValue < 1:
+                newValue += 26
                 caps = not caps
 
             if caps == True:
-                new_value += 64
+                newValue += 64
             else:
-                new_value += 96
+                newValue += 96
 
-            decryptedText += chr(new_value)
+            decryptedText += chr(newValue)
 
         else:
-            decryptedText += shift_text[char]
+            decryptedText += shiftText[char]
 
     return decryptedText
     
@@ -256,6 +262,9 @@ def decryption():
                 print("\nPlease enter a number between 1 and 2\n")
                 continue
     print(decryptedText)
+
+
+# ------------Things that happen at the start------------- #
 
 
 def start():
