@@ -48,14 +48,13 @@ def simple_shift(shift_text, shift_num):
             div = new_value//26
             new_value = new_value%26
 
-            if div%2 == 0: #if it is even it needs to be a cap
-                new_value += 64
-            elif new_value == 0:
+            if new_value == 0:
                 new_value += 90
+            elif div%2 == 0: #if it is even it needs to be a cap
+                new_value += 64
             else: #if odd it needs to be a lowercase
                 new_value += 96
 
-            print(new_value)
             encryptedText += chr(new_value)
 
         elif (ord(shift_text[char]) >= 97 and ord(shift_text[char]) <= 122):
@@ -65,11 +64,13 @@ def simple_shift(shift_text, shift_num):
 
             div = new_value//26
             new_value = new_value%26
-
-            if div%2 == 1: #if it is odd it needs to be a cap
+            
+            if new_value == 0:
+                new_value += 122
+            elif div%2 == 1: #if it is odd it needs to be a cap
                 new_value += 64
             else: #if even it has to be a lower case
-                new_value += 961
+                new_value += 96
 
             encryptedText += chr(new_value)
 
@@ -99,17 +100,14 @@ def advanced_shift(shiftText, shiftNum):
             letter_value -= 64 #This gets A to 1 this means we can tell which value this should be
             new_value = letter_value + shiftNum
 
-            while new_value > 26:
-                new_value -= 26
-                caps = not caps
+            div = new_value//26
+            new_value = new_value%26
 
-            while new_value < 1:
-                new_value += 26
-                caps = not caps
-
-            if caps == True:
+            if new_value == 0:
+                new_value += 90
+            elif div%2 == 0: #if it is even it needs to be a cap
                 new_value += 64
-            else:
+            else: #if odd it needs to be a lowercase
                 new_value += 96
 
             encyptedText += chr(new_value)
@@ -120,17 +118,14 @@ def advanced_shift(shiftText, shiftNum):
             letter_value -= 96  # This gets A to 1 this means we can tell which value this should be
             new_value = letter_value + shiftNum
 
-            while new_value > 26:
-                new_value -= 26
-                caps = not caps
+            div = new_value//26
+            new_value = new_value%26
 
-            while new_value < 1:
-                new_value += 26
-                caps = not caps
-
-            if caps == True:
+            if new_value == 0:
+                new_value += 122
+            elif div%2 == 1: #if it is odd it needs to be a cap
                 new_value += 64
-            else:
+            else: #if even it has to be a lower case
                 new_value += 96
 
             encyptedText += chr(new_value)
