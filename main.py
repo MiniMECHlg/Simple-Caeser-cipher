@@ -186,58 +186,48 @@ def simple_decryption(textToDecrypt):
             print("Please enter an integer number")
             continue
     decryptedText = ""
-    caps = False
     for char in range(len(textToDecrypt)):
         if (ord(textToDecrypt[char]) >= 65 and ord(textToDecrypt[char]) <= 90):
-            caps = True
             letterValue = ord(textToDecrypt[char])
             letterValue -= 64 #This gets A to 1 this means we can tell which value this should be
-            newValue = letterValue + shiftN2um
+            newValue = letterValue + shiftNum
 
-            while newValue > 26:
-                newValue -= 26
-                caps = not caps
+            div = newValue//26
+            newValue = newValue%26
 
-            while newValue < 1:
-                newValue += 26
-                caps = not caps
-
-            if caps == True:
+            if newValue == 0:
+                newValue += 90
+            elif div%2 == 0: #if it is even it needs to be a cap
                 newValue += 64
-            else:
+            else: #if odd it needs to be a lowercase
                 newValue += 96
 
             decryptedText += chr(newValue)
 
         elif (ord(textToDecrypt[char]) >= 97 and ord(textToDecrypt[char]) <= 122):
-            caps = False
             letterValue = ord(textToDecrypt[char])
             letterValue -= 96  # This gets A to 1 this means we can tell which value this should be
             newValue = letterValue + shiftNum
 
-            while newValue > 26:
-                newValue -= 26
-                caps = not caps
+            div = newValue//26
+            newValue = newValue%26
 
-            while newValue < 1:
-                newValue += 26
-                caps = not caps
-
-            if caps == True:
+            if newValue == 0:
+                newValue += 122
+            elif div%2 == 1: #if it is odd it needs to be a cap
                 newValue += 64
-            else:
+            else: #if even it has to be a lower case
                 newValue += 96
 
             decryptedText += chr(newValue)
 
         else:
-            decryptedText += shiftText[char]
+            decryptedText += textToDecrypt[char]
 
     return decryptedText
     
 
-
-def advanced_decryption(textToDecrypt):
+def advanced_decryptions(textToDecrypt):
     pass
 
 
