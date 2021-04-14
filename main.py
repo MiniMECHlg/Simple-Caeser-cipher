@@ -20,7 +20,7 @@ Ascii characters
 A-Z = 65-90
 a-z = 97-122
 Space is 32
-I would like this to support both upper and lower case characters and numbers
+I would like this to support both upper and lower case characters
 if Z has to go up one it will go to a lower case a instead of an upper case A
 """
 
@@ -45,14 +45,14 @@ def join(wordList):
 
 def simple_shift(shiftText, shiftNum):
     encryptedText = ""
-    for char in range(len(shiftText)):
-        if (ord(shiftText[char]) >= 65 and ord(shiftText[char]) <= 90):
+    for char in range(len(shiftText)): #goes through each character in the text
+        if (ord(shiftText[char]) >= 65 and ord(shiftText[char]) <= 90): #If it is a capital
             letterValue = ord(shiftText[char])
             letterValue -= 64 #This gets A to 1 this means we can tell which value this should be
             newValue = letterValue + shiftNum
 
-            div = newValue//26
-            newValue = newValue%26
+            div = newValue//26 #used to see if the letter should be a negative or positive
+            newValue = newValue%26 #used to find what the letter should be
 
             if newValue == 0:
                 newValue += 90
@@ -63,13 +63,13 @@ def simple_shift(shiftText, shiftNum):
 
             encryptedText += chr(newValue)
 
-        elif (ord(shiftText[char]) >= 97 and ord(shiftText[char]) <= 122):
+        elif (ord(shiftText[char]) >= 97 and ord(shiftText[char]) <= 122): #if it is a lower case
             letterValue = ord(shiftText[char])
             letterValue -= 96  # This gets A to 1 this means we can tell which value this should be
             newValue = letterValue + shiftNum
 
-            div = newValue//26
-            newValue = newValue%26
+            div = newValue//26 #used to see if the letter should be a negative or positive
+            newValue = newValue%26 #used to find what the letter should be
             
             if newValue == 0:
                 newValue += 122
@@ -78,9 +78,9 @@ def simple_shift(shiftText, shiftNum):
             else: #if even it has to be a lower case
                 newValue += 96
 
-            encryptedText += chr(newValue)
+            encryptedText += chr(newValue) #adds to this varaible to print at the end
 
-        else:
+        else: #if the character is not a letter then just use it as normal
             encryptedText += shiftText[char]
 
     return encryptedText
@@ -91,6 +91,7 @@ def advanced_shift(shiftText, shiftNum):
     char = 0
     while char != (len(shiftText)):
         if (char % 5) == 0 and (char != 0):
+            #split the text, add a space, rejoin the text
             textArray = split(shiftText)
             textArray.insert(char, " ")
             shiftText = join(textArray)
@@ -106,8 +107,8 @@ def advanced_shift(shiftText, shiftNum):
             letterValue -= 64 #This gets A to 1 this means we can tell which value this should be
             newValue = letterValue + shiftNum
 
-            div = newValue//26
-            newValue = newValue%26
+            div = newValue//26 #used to see if the letter should be a negative or positive
+            newValue = newValue%26 #used to find what the letter should be
 
             if newValue == 0:
                 newValue += 90
@@ -124,8 +125,8 @@ def advanced_shift(shiftText, shiftNum):
             letterValue -= 96  # This gets A to 1 this means we can tell which value this should be
             newValue = letterValue + shiftNum
 
-            div = newValue//26
-            newValue = newValue%26
+            div = newValue//26 #used to see if the letter should be a negative or positive
+            newValue = newValue%26 #used to find what the letter should be
 
             if newValue == 0:
                 newValue += 122
@@ -192,8 +193,8 @@ def simple_decryption(textToDecrypt):
             letterValue -= 64 #This gets A to 1 this means we can tell which value this should be
             newValue = letterValue + shiftNum
 
-            div = newValue//26
-            newValue = newValue%26
+            div = newValue//26 #used to see if the letter should be a negative or positive
+            newValue = newValue%26 #used to find what the letter should be
 
             if newValue == 0:
                 newValue += 90
@@ -209,8 +210,8 @@ def simple_decryption(textToDecrypt):
             letterValue -= 96  # This gets A to 1 this means we can tell which value this should be
             newValue = letterValue + shiftNum
 
-            div = newValue//26
-            newValue = newValue%26
+            div = newValue//26 #used to see if the letter should be a negative or positive
+            newValue = newValue%26 #used to find what the letter should be
 
             if newValue == 0:
                 newValue += 122
