@@ -96,11 +96,6 @@ def advanced_shift(shiftText, shiftNum):
             textArray.insert(char, " ")
             shiftText = join(textArray)
 
-        elif((ord(shiftText[char]) != 32) and not ((ord(shiftText[char]) >= 65 and ord(shiftText[char]) <= 90) or (ord(shiftText[char]) >= 97 and ord(shiftText[char]) <= 122))):
-            textArray = split(shiftText)
-            del textArray[char]
-            shiftText = join(textArray)
-
         if (ord(shiftText[char]) >= 65 and ord(shiftText[char]) <= 90):
             caps = True
             letterValue = ord(shiftText[char])
@@ -137,8 +132,11 @@ def advanced_shift(shiftText, shiftNum):
 
             encyptedText += chr(newValue)
 
-        else:
-            encyptedText += shiftText[char]
+        elif (ord(shiftText[char]) == 32): #If there is a space add a space
+            encyptedText += " "
+
+        #This will remove any punctuation as there will be no punctuation added to encyrptedText
+
         char += 1
 
     return encyptedText
