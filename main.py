@@ -24,8 +24,7 @@ I would like this to support both upper and lower case characters
 if Z has to go up one it will go to a lower case a instead of an upper case A
 """
 
-
-# ----------Basic parts for advnaced encryption----------- #
+# ----------Basic parts for advanced encryption----------- #
 
 
 #Splits a word into a list of single characters
@@ -226,8 +225,24 @@ def simple_decryption(textToDecrypt):
     return decryptedText
     
 
-def advanced_decryptions(textToDecrypt):
-    pass
+def advanced_decryption(textToDecrypt):
+    """
+    The first thing that this should do is strip the text of all of the whitespace
+    and to get rid of all the punctuation. I was going to do this through
+    first removing whitespace then doing punctuation but I thought it would be
+    more efficient to turn everything lowercase then add characters to a string
+    """
+
+    textToDecrypt = textToDecrypt.lower() #Turns all text into lowercase
+    formattedText = ""
+
+    for char in range(len(textToDecrypt)):
+        if (ord(textToDecrypt[char]) >= 97 and ord(textToDecrypt[char]) <= 122):
+            formattedText += textToDecrypt[char] #formatted text that only consists of lowercase letters
+
+    
+
+    
 
 
 def decryption():
@@ -235,7 +250,7 @@ def decryption():
     while True:
         try:
             print("Please pick an option\n")
-            print("Would you like a\n1. Set shift decryption\n 2. Automatic shift")
+            print("Would you like a\n1. Set shift decryption\n2. Automatic shift")
             decryptionOption = int(input(">>:"))
         except:
             print("\nPlease enter an integer number!")
