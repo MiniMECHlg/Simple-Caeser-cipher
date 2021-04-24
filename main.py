@@ -239,23 +239,23 @@ def advanced_decryption(textToDecrypt):
         if ((ord(textToDecrypt[char]) >= 97 and ord(textToDecrypt[char]) <= 122) or (ord(textToDecrypt[char]) >= 65 and ord(textToDecrypt[char]) <= 90) or (ord(textToDecrypt[char]) == 32)):
             formattedText += textToDecrypt[char] #formatted text that has no punctuation
 
-    commonWordsFile = open("1000-most-common-words.txt", "r")
+    commonWordsFile = open("1000-most-common-words.txt", "r") #Opens the file containing all the most common words
     fileText = commonWordsFile.read()
-    commonWords = fileText.split("\n")
+    commonWords = fileText.split("\n") #makes an array with each value being a common word
 
-    wordCount = []
+    wordCount = [] #array that will hold the word count in an array.
 
     for index in range(53): #To check capitals as well
         currentWordCount = 0
-        shiftedText = simple_shift(formattedText, index)
-        for word in range(len(commonWords)):
-            if commonWords[word] in shiftedText:
+        shiftedText = simple_shift(formattedText, index) #This will shift the text
+        for word in range(len(commonWords)): #For each word that is in the file
+            if commonWords[word] in shiftedText: #if that word is in the text
                 currentWordCount += 1
-            elif commonWords[word].title() in shiftedText:
+            elif commonWords[word].title() in shiftedText: #If that word but capatilised is in the text
                 currentWordCount += 1
-        wordCount.append(currentWordCount)
+        wordCount.append(currentWordCount) 
 
-    return "I think the answer is: " + simple_shift(formattedText, wordCount.index(max(wordCount)))
+    return "I think the answer is: " + simple_shift(formattedText, wordCount.index(max(wordCount))) #Returns prediction of the value
 
 
 def decryption():
