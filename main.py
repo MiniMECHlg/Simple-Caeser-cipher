@@ -227,22 +227,35 @@ def simple_decryption(textToDecrypt):
 
 def advanced_decryption(textToDecrypt):
     """
-    The first thing that this should do is strip the text of all of the whitespace
-    and to get rid of all the punctuation. I was going to do this through
-    first removing whitespace then doing punctuation but I thought it would be
-    more efficient to turn everything lowercase then add characters to a string
+    I was going to get rid of whitespace but I have decided against it
+    as I think that it would make more sense not too if someone was just
+    entering text that did not go through an adnvaced encryption
+    However I will get rid of punctuation
     """
 
-    textToDecrypt = textToDecrypt.lower() #Turns all text into lowercase
     formattedText = ""
 
     for char in range(len(textToDecrypt)):
-        if (ord(textToDecrypt[char]) >= 97 and ord(textToDecrypt[char]) <= 122):
-            formattedText += textToDecrypt[char] #formatted text that only consists of lowercase letters
+        if ((ord(textToDecrypt[char]) >= 97 and ord(textToDecrypt[char]) <= 122) or (ord(textToDecrypt[char]) >= 65 and ord(textToDecrypt[char]) <= 90) or (ord(textToDecrypt[char]) == 32)):
+            formattedText += textToDecrypt[char] #formatted text that has no punctuation
 
-    
+    commonWordsFile = open("1000-most-common-words.txt", "r")
+    fileText = commonWordsFile.read()
+    commonWords = fileText.split("\n")
 
-    
+    wordCount = []
+
+    for index in range(53): #To check capitals as well
+        currentWordCount = 0
+        shiftedText = simple_shift(formattedText, index)
+        for word in range(len(commonWords)):
+            if commonWords[word] in shiftedText:
+                currentWordCount += 1
+            elif commonWords[word].title() in shiftedText:
+                currentWordCount += 1
+        wordCount.append(currentWordCount)
+
+    return "I think the answer is: " + simple_shift(formattedText, wordCount.index(max(wordCount)))
 
 
 def decryption():
