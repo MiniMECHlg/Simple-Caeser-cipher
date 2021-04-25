@@ -277,7 +277,7 @@ def start_cli():
                     print("Would you like a\n1. Set shift decryption\n2. Automatic shift")
                     decryptionOption = int(input(">>:"))
                 except:
-                    print("\nPlease enter an integer number!")
+                    print("\nPlease enter an integer number!\n")
                     continue
                 finally:
                     if (decryptionOption == 1):
