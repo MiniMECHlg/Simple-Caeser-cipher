@@ -1,6 +1,8 @@
 ## Simple Caesar Cipher
 
 * * *
+Made By MiniMECH (Jay Gardener)
+* * *
 
 This repository contains 2 versions of the same CLI application.
 
