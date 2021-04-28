@@ -28,7 +28,8 @@ if Z has to go up one it will go to a lower case a instead of an upper case A
 */
 
 using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
+using System.Linq; 
 
 namespace CaesarCipher
 {
@@ -50,14 +51,144 @@ namespace CaesarCipher
             return word;
         }
 
+
+
         public static string simple_shift(string shiftText, int shiftNum)
         {
-            return "test";
+            string encryptedText = "";
+            for(int charNum = 0; charNum < shiftText.Length; charNum++)
+            {
+                if (((int)Convert.ToChar(shiftText[charNum]) >= 65) && ((int)Convert.ToChar(shiftText[charNum]) <= 90))
+                {
+                    //this is a capital
+                    int letterValue = ((int)Convert.ToChar(shiftText[charNum]));
+                    letterValue -= 64;
+                    int newValue = letterValue + shiftNum;
+
+                    int div = (int)newValue / 26;
+                    newValue = newValue % 26;
+
+                    if (newValue == 0)
+                    {
+                        newValue += 90;
+                    }
+                    else if (div%2 == 0)
+                    {
+                        newValue += 64;
+                    }
+                    else
+                    {
+                        newValue += 96;
+                    }
+
+                    encryptedText += ((char)newValue).ToString();
+                }
+                else if (((int)Convert.ToChar(shiftText[charNum]) >= 97) && ((int)Convert.ToChar(shiftText[charNum]) <= 122))
+                {
+                    int letterValue = ((int)Convert.ToChar(shiftText[charNum]));
+                    letterValue -= 96;
+                    int newValue = letterValue + shiftNum;
+
+                    int div = (int)newValue / 26;
+                    newValue = newValue % 26;
+
+                    if (newValue == 0)
+                    {
+                        newValue += 122;
+                    }
+                    else if (div%2 == 1)
+                    {
+                        newValue += 64;
+                    }
+                    else
+                    {
+                        newValue += 96;
+                    }
+
+                    encryptedText += ((char)newValue).ToString();
+                }
+                else
+                {
+                    encryptedText += shiftText[charNum];
+                }
+            
+            }
+            return encryptedText;
         }
+
+
 
         public static string advanced_shift(string shiftText, int shiftNum)
         {
-            return "test";
+            string encryptedText = "";
+            int charNum = 0; 
+            while (charNum != shiftText.Length)
+            {
+                if((charNum%5) == 0 && (charNum != 0))
+                {
+                    char[] textArray = split(shiftText);
+                    List<char> textList = textArray.ToList();
+                    textList.Insert(charNum, Convert.ToChar(" "));
+                    shiftText = join(textList.ToArray());
+                }
+
+                if (((int)Convert.ToChar(shiftText[charNum]) >= 65) && ((int)Convert.ToChar(shiftText[charNum]) <= 90))
+                {
+                    //this is a capital
+                    int letterValue = ((int)Convert.ToChar(shiftText[charNum]));
+                    letterValue -= 64;
+                    int newValue = letterValue + shiftNum;
+
+                    int div = (int)newValue / 26;
+                    newValue = newValue % 26;
+
+                    if (newValue == 0)
+                    {
+                        newValue += 90;
+                    }
+                    else if (div%2 == 0)
+                    {
+                        newValue += 64;
+                    }
+                    else
+                    {
+                        newValue += 96;
+                    }
+
+                    encryptedText += ((char)newValue).ToString();
+                }
+                else if (((int)Convert.ToChar(shiftText[charNum]) >= 97) && ((int)Convert.ToChar(shiftText[charNum]) <= 122))
+                {
+                    int letterValue = ((int)Convert.ToChar(shiftText[charNum]));
+                    letterValue -= 96;
+                    int newValue = letterValue + shiftNum;
+
+                    int div = (int)newValue / 26;
+                    newValue = newValue % 26;
+
+                    if (newValue == 0)
+                    {
+                        newValue += 122;
+                    }
+                    else if (div%2 == 1)
+                    {
+                        newValue += 64;
+                    }
+                    else
+                    {
+                        newValue += 96;
+                    }
+
+                    encryptedText += ((char)newValue).ToString();
+                }
+                else if ((int)Convert.ToChar(shiftText[charNum]) == 32)
+                {
+                    encryptedText += " ";
+                }
+
+                charNum += 1;
+            }
+            return encryptedText;
         }
 
 
@@ -142,7 +273,7 @@ namespace CaesarCipher
                                 Console.WriteLine("\nPlease enter a number between 1 and 2\n");
                             }
                         }
-                        if (exit = true) break;
+                        if (exit == true) break;
                     }
                     Console.WriteLine(encryptedText);
                 }

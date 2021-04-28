@@ -99,7 +99,6 @@ def advanced_shift(shiftText, shiftNum):
             shiftText = join(textArray)
 
         if (ord(shiftText[char]) >= 65 and ord(shiftText[char]) <= 90):
-            caps = True
             letterValue = ord(shiftText[char])
             letterValue -= 64 #This gets A to 1 this means we can tell which value this should be
             newValue = letterValue + shiftNum
@@ -117,7 +116,6 @@ def advanced_shift(shiftText, shiftNum):
             encyptedText += chr(newValue)
 
         elif (ord(shiftText[char]) >= 97 and ord(shiftText[char]) <= 122):
-            caps = False
             letterValue = ord(shiftText[char])
             letterValue -= 96  # This gets A to 1 this means we can tell which value this should be
             newValue = letterValue + shiftNum
